@@ -1,0 +1,21 @@
+Nano is an easy to use text editor that works in Linux terminals.
+
+Not only can I type text and see it instantly, but also can copy and paste text!
+
+I will explain how it works. The instructions are always at the bottom of the screen!
+By using Alt+A and Alt+6 I can select and copy text.
+
+For example, I will copy "this text" here.
+
+
+
+
+I will move this line of text!
+
+See? It is amazing!
+
+You can paste whatever is in the buffer with Ctrl+U.
+
+It is also possible to cut and paste an entire line at a time!
+
+To exit the program, just do Ctrl+X and it will ask if you want to save the file!
