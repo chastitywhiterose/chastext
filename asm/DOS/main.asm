@@ -342,29 +342,44 @@ mov ax,bx ;copy the string length back to ax
 
 ret
 
-;compare the string at si to the one at di
+;strcmp compares the string at si to the one at di
+;ax returns 0 if the strings are the same and 1 if different
+;the algorithm is simple but I will explain it for those who are confused
+
+;ax is initialized to zero
+;a byte from each string is loaded into the al and bl registers
+;the bytes are compared. if they are different, then we jump to the end
+;However, if they are the same, then we check if one of them is zero
+;for this purpose it doesn't matter whether we compare al or bl with zero
+;because it is known that they are the same if the jnz did not take place
+;if it is zero, this also jumps to the end of the function
+;If neither jump took place, then we jump to the start of the loop
+;but when the function finally ends bl will be subtracted from al
+;this ensures that the function returns zero if the final characters are the same
 
 strcmp:
 
-mov ax,0 ;this will be stay zero unless the strings are different
+mov ax,0
 
 strcmp_start:
-mov bl,[di]
-cmp bl,0
-jz strcmp_end
-mov bh,[si]
-cmp bh,0
+
+;read a byte from each string
+mov al,[di]
+mov bl,[si]
+cmp al,bl
+jnz strcmp_end
+
+cmp al,0
 jz strcmp_end
 
 inc di
 inc si
 
-cmp bl,bh
-jz strcmp_start ;if they are the same, continue to next character
-
-inc ax ;if they were different, ax will be incremented and the function ends
+jmp strcmp_start
 
 strcmp_end:
+sub al,bl
+
 ret
 
 ;function to move ahead to the next argument
@@ -609,4 +624,4 @@ bytes_read dw 0
 string_search dw 0 ; place to hold the search string pointer
 string_replace dw 0 ; place to hold the replacement string pointer
 
-byte_array db 0x70 dup 0
+byte_array db 0x73 dup 0
