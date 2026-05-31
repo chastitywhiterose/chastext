@@ -1,3 +1,12 @@
+;chastext is a generic find and replace program for text files
+;using it is very simple because it only requires 3 arguments
+;
+;chastext filename "search string" "replacement string"
+;
+;It does not do regular expressions like sed but it is useful
+;I use it when I need to change the name of a variable in a program
+;or when I am modifying configuration files.
+
 org 100h     ;DOS programs start at this address
 
 mov word [radix],16 ; can choose radix for integer output!
@@ -183,9 +192,6 @@ call putchar
 jmp textdump ;restart the main loop
 
 not_match: 
-
-;mov al,[byte_array]
-;call putchar
 
 ;Instead of calling the putchar function in the case of no match,
 ;I do a system call to print 1 byte to standard output
